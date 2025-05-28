@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Snackis.Data;
 
 namespace Snackis
 {
@@ -10,6 +12,11 @@ namespace Snackis
 
             builder.Services.AddDbContext<Models.MyDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbContext") ?? throw new InvalidOperationException("Anslutning till DB hittades inte")));
+
+            builder.Services.AddDbContext<Snackis.Data.SnackisContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbContext") ?? throw new InvalidOperationException("Anslutning till DB hittades inte")));
+
+            builder.Services.AddDefaultIdentity<Areas.Identity.Data.SnackisUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<SnackisContext>();
 
             // Add services to the container.
             builder.Services.AddRazorPages();
