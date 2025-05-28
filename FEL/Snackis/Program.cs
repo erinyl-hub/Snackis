@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Snackis.Data;
+
 namespace Snackis
 {
     public class Program
@@ -5,6 +9,14 @@ namespace Snackis
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<Models.MyDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbContext") ?? throw new InvalidOperationException("Anslutning till DB hittades inte")));
+
+            builder.Services.AddDbContext<Snackis.Data.SnackisContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbContext") ?? throw new InvalidOperationException("Anslutning till DB hittades inte")));
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<SnackisContext>();
 
             // Add services to the container.
             builder.Services.AddRazorPages();
