@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace Snackis
 {
     public class Program
@@ -5,6 +7,9 @@ namespace Snackis
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<Models.MyDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbContext") ?? throw new InvalidOperationException("Anslutning till DB hittades inte")));
 
             // Add services to the container.
             builder.Services.AddRazorPages();
