@@ -16,7 +16,9 @@ namespace Snackis
             builder.Services.AddDbContext<Snackis.Data.SnackisContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("MyDbContext") ?? throw new InvalidOperationException("Anslutning till DB hittades inte")));
 
-            builder.Services.AddDefaultIdentity<Areas.Identity.Data.SnackisUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<SnackisContext>();
+            builder.Services.AddDefaultIdentity<Areas.Identity.Data.SnackisUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<SnackisContext>();
 
             // Add services to the container.
             builder.Services.AddRazorPages();
