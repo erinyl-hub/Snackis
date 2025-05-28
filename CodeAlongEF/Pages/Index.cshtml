@@ -1,0 +1,29 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+
+    @if (Model.MyUser != null)
+    {
+
+        @if (Model.MyUser.BirthYear < DateTime.Now.Year - 18)
+        {
+            <h3>Något läskigt och barnförbjudet</h3>
+        }
+        else
+        {
+            <h3>Något snällt och trevligt</h3>
+        }
+
+        <h1 class="display-4">@Model.MyUser.Name äger dessa bilar</h1>
+
+        @foreach (var car in Model.MyCars)
+        {
+            <p>@car.Make - @car.Plate</p>
+        }
+    }
+
+</div>

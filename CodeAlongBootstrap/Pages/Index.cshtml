@@ -1,0 +1,78 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Lite text</p>
+
+</div>
+
+
+<div>
+
+    <div class="border">Text som syns!</div>
+
+    <div class="d-none d-sm-block border">Small</div>
+
+    <div class="d-none d-md-block border">Medium</div>
+
+    <div class="d-none d-lg-block border">large</div>
+
+    <div class="d-none d-xl-block border">xlarge</div>
+
+    <hr class="m-5"/>
+
+    <div class="row">
+        <div class="col">Kolumn 1</div>
+        <div class="col">Kolumn 2</div>
+        <div class="col">Kolumn 3</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-xl-2 border">Kolumn 1</div>
+        <div class="col-md-6 col-xl-2 border">Kolumn 2</div>
+        <div class="col-md-2 col-xl-8 border">Kolumn 3</div>
+    </div>
+
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Förnamn</th>
+                <th>Efternamn</th>
+                <th>Email</th>
+            </tr>
+
+        </thead>
+        <tr>
+            <td>Mikael</td>
+            <td>Engström</td>
+            <td>micke@zocom.se</td>
+        </tr>
+        <tr>
+            <td>Johan</td>
+            <td>Johansson</td>
+            <td>johan@zocom.se</td>
+        </tr>
+        <tr>
+            <td>Mikael</td>
+            <td>Engström</td>
+            <td>micke@zocom.se</td>
+        </tr>
+
+    </table>
+
+    <div class="alert alert-success">
+        <strong>Lyssande!</strong> Du loggade in!
+    </div>
+
+    <div class="card">
+
+        <div class="card-header"><strong>Cyckelpump</strong> </div>
+        <div class="card-body">Bra för cyklar <br /> Luftmadrasser <br /> Med mera </div>
+        <div class="card-footer text-danger">199 kr</div>
+    </div>
+
+</div>

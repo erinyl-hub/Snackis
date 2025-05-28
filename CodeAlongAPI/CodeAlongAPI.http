@@ -1,0 +1,6 @@
+@CodeAlongAPI_HostAddress = http://localhost:5036
+
+GET {{CodeAlongAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,47 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Min kassabok</h1>
+
+    @if(Model.Transaction != null)
+    {
+        <h3>@Model.Transaction.Title</h3>
+        <p>Belopp: @Model.Transaction.Amount</p>
+        <p>Datum: @Model.Transaction.Date</p>
+    }
+
+
+    <table class="table table-striped">
+        @foreach(var transaction in Model.Transactions)
+        {
+            <tr>
+                <td> @transaction.Id </td>
+                <td> @transaction.Title </td>
+                <td> @transaction.Amount </td>
+                <td> @transaction.Date </td>
+                <td><a asp-route-id="@transaction.Id">Mer info</a></td>
+            </tr>
+        }
+
+
+    </table>
+
+    <form method="post">
+        <label asp-for="Transaction.Title"></label>
+        <input asp-for="Transaction.Title" />
+        <br />
+        <label asp-for="Transaction.Amount"></label>
+        <input asp-for="Transaction.Amount" />
+        <br />
+        <label asp-for="Transaction.Date"></label>
+        <input asp-for="Transaction.Date" />
+        <br />
+        <input type="submit" value="Lägg till ny transaktion" />
+    </form>
+
+
+</div>

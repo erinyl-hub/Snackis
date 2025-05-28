@@ -1,0 +1,24 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <h1 class="display-4">
+        Välj ditt favoritnummer
+    </h1>
+
+    @for(int i = 0; i<=9; i++)
+    {
+        
+        <a asp-route-selectedNumber="@i">Nummer @i</a>      
+    }
+
+    <h1>Du valde @Model.Number. Bra val!</h1>
+
+
+</div>

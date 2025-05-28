@@ -1,0 +1,17 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    <h1>Alla personer</h1>
+
+    @foreach(var person in Model.AllPersons)
+    {
+        <p>@person.Name --- @person.BirthYear</p>
+    }
+
+</div>

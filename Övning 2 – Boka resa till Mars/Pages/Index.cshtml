@@ -1,0 +1,80 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    DateTime dateTime = DateTime.Now;
+    int value;
+}
+
+<form method="post">
+
+
+    <label asp-for="@Model.FirstName"></label>
+    <input asp-for="@Model.FirstName" />
+
+    <br />
+    <br />
+
+    <label asp-for="@Model.LastName"></label>
+    <input asp-for="@Model.LastName" />
+
+    <br />
+    <br />
+
+    <label asp-for="@Model.Departure"></label>
+    <input asp-for="@Model.Departure" type="date" id="departure" value="@dateTime" />
+
+    <br /><br />
+
+    <label asp-for="@Model.Return"></label>
+    <input asp-for="@Model.Return" type="date" id="arrival" value="@dateTime" />
+
+    @section Scripts {
+        <script>
+            const departureInput = document.getElementById("departure");
+            const arrivalInput = document.getElementById("arrival");
+
+            departureInput.addEventListener
+            ("change", function () {arrivalInput.min = this.value;}
+            );
+        </script>
+    }
+
+    <br /><br />
+
+    <label asp-for="@Model.BagsCount"></label>
+    <input asp-for="@Model.BagsCount" />
+
+    <br /><br />
+
+    <label asp-for="@Model.Water"></label>
+    <input asp-for="@Model.Water" />
+
+    <br /><br />
+
+    <label asp-for="@Model.Food"></label>
+    <input asp-for="@Model.Food" />
+
+
+    <br /><br />
+
+    <select name="ChosenColor">
+        @foreach (var color in Model.Color)
+        {
+            <option value="@color.Key">@color.Key (@color.Value $)</option>
+        }
+    </select>
+
+
+    <br /><br />
+
+    <label asp-for="@Model.Luxarie"></label>
+    <input asp-for="@Model.Luxarie" />
+
+    <br /><br />
+    <input type="submit" value="Reserv" />
+
+</form>
+
+<h1>@Model.Sum</h1>
+

@@ -1,0 +1,52 @@
+﻿@page
+@model Övning_2___Frissan.Pages.BookingModel
+@{
+    DateTime today = DateTime.Now;
+
+
+    // lägg till att man måste välja frisöt först innan man kan ens välja datum, valt datum kommer lediga tider upp, välja tid, skriva namn, boka
+}
+
+
+<form method="post">
+
+
+
+    <select name="ChosenHairdresser" onchange="this.form.submit()">
+        @foreach (var hairdressers in Model.hairdressersList)
+        {
+            <option value="@hairdressers">@hairdressers.Name</option>
+        }
+    </select>
+
+    <br /><br />
+
+    <label asp-for="ChosenDate"></label>
+    <input asp-for="ChosenDate" type="date" value="@today" onchange="this.form.submit()" />
+
+    <input type="submit" value="Show time" />
+
+</form> 
+
+<table>
+
+    
+
+    @for(int i = 0; i < 7; i++)
+    {
+        
+        <div>
+
+            <d1>Test + @i</d1>
+        </div>
+
+        if (!Model.HairdresserSchedule.ContainsKey(Model.ChosenDate))
+        {
+            Console.WriteLine("Funkar" + i);
+            
+        }
+
+    }
+
+
+</table>

@@ -1,0 +1,37 @@
+﻿@page
+@model Övning_2___Frissan.Pages.AdminModel
+@{
+
+    
+}
+
+<form method="post">
+
+    <label asp-for="Hairdresser.Name"></label>
+    <input asp-for="Hairdresser.Name" />
+
+    <br /><br />
+
+    <label asp-for="Hairdresser.Cutting"></label>
+    <input asp-for="Hairdresser.Cutting" />
+
+    <br /><br />
+
+    <label asp-for="Hairdresser.Coloring"></label>
+    <input asp-for="Hairdresser.Coloring" />
+
+    <br /><br />
+
+    <label asp-for="Hairdresser.Extensions"></label>
+    <input asp-for="Hairdresser.Extensions" />
+
+    <br /><br />
+
+    <input type="submit" value="Add hairdresser" />
+</form>
+
+@* <h1>@Model.Hairdresser.Name</h1>
+<br />
+<br /> *@
+
+

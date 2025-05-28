@@ -1,0 +1,6 @@
+@CodeAlongKassabok_HostAddress = http://localhost:5009
+
+GET {{CodeAlongKassabok_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

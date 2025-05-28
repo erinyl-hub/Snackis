@@ -1,0 +1,22 @@
+﻿@page
+@model CodeAlongRazor2.Pages.CarsModel
+@{
+}
+
+@foreach (var car in Model.Cars)
+{
+    <div>
+        @car.Make - @(DateTime.Now.Year - car.Year) år gammal.
+        <a asp-route-carId="@car.Id">Mer info</a>
+    </div>
+
+}
+
+@if (Model.SelectedCar != null)
+{
+    <br />
+    <p>Model: @Model.SelectedCar.Make</p>
+    <p>Årsmodell: @Model.SelectedCar.Year</p>
+    <p>Fungerar @(Model.SelectedCar.Working ? "Ja" : "Nej")</p>
+    <p>Id: @Model.SelectedCar.Id</p>
+}

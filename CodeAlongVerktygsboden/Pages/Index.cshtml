@@ -1,0 +1,26 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Verktygsboden</h1>
+
+    <img src="img/toolshed.jpg" width="300" />
+
+
+    @foreach(var asset in Model.Assets)
+    {
+        <h3>@asset.Name</h3>
+
+@*         @foreach(var booking in Model.AllBookings)
+        {
+            if(asset.Id == booking.AssetId)
+            {
+                <p>@booking.FromDate.ToShortDateString() - @booking.ToDate.ToShortTimeString() - @booking.UserId</p>
+            }
+        } *@
+    }
+
+</div>

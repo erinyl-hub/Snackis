@@ -1,0 +1,38 @@
+﻿@page
+@model CodeAlongRazor2.Pages.FormModel
+@{
+    var today = DateTime.Now;
+}
+
+
+<form method="post">
+
+    <label for="firstname">Förnamn:</label>
+    <input type="text" id="firstname" name="FirstName"/>
+
+    <br />
+
+    <label asp-for="@Model.LastName"></label>
+    <input asp-for="@Model.LastName"/>
+
+    <br />
+
+    <label asp-for="@Model.NewsLetter"></label>
+    <input asp-for="@Model.NewsLetter"/>
+
+    <br />
+
+    <label asp-for="@Model.MyNumber"></label>
+    <input asp-for="@Model.MyNumber" />
+
+    <br />
+
+    <label asp-for="@Model.MyDate"></label>
+    <input asp-for="@Model.MyDate" value="@today" />
+
+
+    <br />
+    <input type="submit" value="skicka" />
+</form>
+
+<h2>@Model.Result</h2>
