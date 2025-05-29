@@ -1,0 +1,45 @@
+﻿@page
+@model Snackis.Pages.RoleAdmin.Heading.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Heading</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Heading.Id" />
+            <div class="form-group">
+                <label asp-for="Heading.HeadingName" class="control-label"></label>
+                <input asp-for="Heading.HeadingName" class="form-control" />
+                <span asp-validation-for="Heading.HeadingName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Heading.Description" class="control-label"></label>
+                <input asp-for="Heading.Description" class="form-control" />
+                <span asp-validation-for="Heading.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Heading.CategorieId" class="control-label"></label>
+                <select asp-for="Heading.CategorieId" class="form-control" asp-items="ViewBag.CategorieId"></select>
+                <span asp-validation-for="Heading.CategorieId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
