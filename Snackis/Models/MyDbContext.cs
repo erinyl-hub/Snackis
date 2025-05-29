@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Snackis.Models.Postings;
 
 namespace Snackis.Models
 {
@@ -9,6 +10,19 @@ namespace Snackis.Models
         }
 
         public DbSet<Models.Postings.Heading> Headings { get; set; }
+        public DbSet<Models.Postings.Categorie> Categories { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Heading>()
+                .HasOne(b => b.Categorie)
+                .WithMany(g => g.Headings)
+                .HasForeignKey(b => b.CategorieId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
 
     }
 }
