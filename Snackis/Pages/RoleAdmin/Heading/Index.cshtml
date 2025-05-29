@@ -30,12 +30,12 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.HeadingName)
-            </td>
+            </td>   
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Categorie.Id)
+                @Html.DisplayFor(modelItem => item.Categorie.CategorieName)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

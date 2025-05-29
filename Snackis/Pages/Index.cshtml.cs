@@ -1,19 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Snackis.Models;
 
 namespace Snackis.Pages;
 
 public class IndexModel : PageModel
 {
-    private readonly ILogger<IndexModel> _logger;
+    private readonly MyDbContext _context;
 
-    public IndexModel(ILogger<IndexModel> logger)
+    public IndexModel(MyDbContext context)
     {
-        _logger = logger;
+        _context = context;
     }
 
-    public void OnGet()
+    public IList<Models.Postings.Categorie> Categorie { get; set; }
+
+    public async Task OnGetAsync()
     {
+        Categorie = await _context.Categories.ToListAsync();
 
     }
 }

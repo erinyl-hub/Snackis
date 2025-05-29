@@ -5,6 +5,24 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <table class="table">
+        <tbody>
+            @foreach (var item in Model.Categorie)
+            {
+                <tr>
+                    <td>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/RoleUser/CategoriePage">
+                                <h4>@Html.DisplayFor(modelItem => item.CategorieName)</h4></a>
+                        </li>
+                       @*  <h4>@Html.DisplayFor(modelItem => item.CategorieName)</h4> *@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

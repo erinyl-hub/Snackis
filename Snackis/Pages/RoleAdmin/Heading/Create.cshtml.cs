@@ -21,7 +21,7 @@ namespace Snackis.Pages.RoleAdmin.Heading
 
         public IActionResult OnGet()
         {
-        ViewData["CategorieId"] = new SelectList(_context.Categories, "Id", "Id");
+        ViewData["CategorieId"] = new SelectList(_context.Categories, "Id", "CategorieName");
             return Page();
         }
 
