@@ -9,13 +9,12 @@
         <tbody>
             @foreach (var item in Model.Categorie)
             {
+                @* <a class="navbar-brand" asp-area="" asp-page="/Index"><h2>Snackis</h2></a> *@
                 <tr>
                     <td>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/RoleUser/CategoriePage">
-                                <h4>@Html.DisplayFor(modelItem => item.CategorieName)</h4></a>
-                        </li>
-                       @*  <h4>@Html.DisplayFor(modelItem => item.CategorieName)</h4> *@
+                        <a class="text-decoration-none text-dark fw-bold" asp-page="/RoleUser/CategoriePage" asp-route-id="@item.Id">
+                            @item.CategorieName
+                        </a>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Description)
