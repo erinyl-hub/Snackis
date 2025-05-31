@@ -8,5 +8,8 @@
 
         public int? CategorieId { get; set; }
         public Categorie? Categorie { get; set; }
+
+
+        public ICollection<Post> Posts { get; set; } = new List<Post>();
     }
 }
