@@ -2,3 +2,64 @@
 @model Snackis.Pages.RoleUser.PostPageModel
 @{
 }
+
+
+<form method="post" enctype="multipart/form-data">
+
+
+    <select id="categorySelect">
+        @foreach (var categorie in Model.Categories)
+        {
+            <option value="@categorie.Id">@categorie.CategorieName</option>
+        }
+    </select>
+
+    <select id="headingSelect"></select>
+
+    <script>
+        const categories = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Categories));
+
+        const categorySelect = document.getElementById('categorySelect');
+        const headingSelect = document.getElementById('headingSelect');
+
+        function updateHeadings() {
+          const selectedId = parseInt(categorySelect.value);
+          const category = categories.find(c => c.Id === selectedId);
+
+          headingSelect.innerHTML = '';
+          if (category && category.Headings) {
+            category.Headings.forEach(h => {
+              const option = document.createElement('option');
+              option.value = h.Id;
+              option.textContent = h.HeadingName;
+              headingSelect.appendChild(option);
+            });
+          }
+        }
+
+        categorySelect.addEventListener('change', updateHeadings);
+
+
+        updateHeadings();
+    </script>
+
+    <br /><br />
+
+
+
+    <br /><br />
+
+    <label asp-for="Post.PostHeading"></label>
+    <input asp-for="Post.PostHeading" />
+    <br /><br />
+    <label asp-for="Post.PostText"></label>
+    <textarea asp-for="Post.PostText" cols="40" rows="5"></textarea>
+    <br />
+
+
+
+    <br />
+
+
+    <input type="submit" class="btn btn-success" value="Spara inlägget" />
+</form>
