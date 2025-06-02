@@ -9,6 +9,7 @@ namespace Snackis.Models.Postings
         public string PostText { get; set; }     
         public DateTime PostDate { get; set; }
         public DateTime? PostUpdated { get; set; }
+        public int CommentsCount { get; set; }
 
 
         public string UserId { get; set; }

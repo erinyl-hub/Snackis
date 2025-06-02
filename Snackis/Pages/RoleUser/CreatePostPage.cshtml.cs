@@ -8,13 +8,13 @@ using Snackis.Models;
 
 namespace Snackis.Pages.RoleUser
 {
-    public class PostPageModel : PageModel
+    public class CreatePostPageModel : PageModel
     {
         private readonly UserManager<SnackisUser> _userManager;
         private readonly MyDbContext _context;
 
 
-        public PostPageModel
+        public CreatePostPageModel
             (UserManager<SnackisUser> userManager, MyDbContext context)
         {
             _userManager = userManager;
