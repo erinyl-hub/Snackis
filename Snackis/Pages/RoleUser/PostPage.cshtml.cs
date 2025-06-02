@@ -13,6 +13,7 @@ namespace Snackis.Pages.RoleUser
         private readonly UserManager<SnackisUser> _userManager;
         private readonly MyDbContext _context;
 
+
         public PostPageModel
             (UserManager<SnackisUser> userManager, MyDbContext context)
         {
@@ -37,6 +38,29 @@ namespace Snackis.Pages.RoleUser
 
         }
 
+        public async Task<IActionResult> OnPostAsync()
+        {
+
+            if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                Post.UserId = _userManager.GetUserId(User);
+                Post.PostDate = DateTime.Now;
+
+                await _context.AddAsync(Post);
+                await _context.SaveChangesAsync();
+                return Page();
+                //return RedirectToPage("Success");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                Categories = await GetCategoriesAsync();
+                return Page();
+            }
+
+            return Page();
+        }
+
 
         private async Task<List<Dtos.CategorieDto>> GetCategoriesAsync()
         {
@@ -53,6 +77,8 @@ namespace Snackis.Pages.RoleUser
                         }).ToList()
                     }).ToListAsync();
         }
+
+           
 
 
     }

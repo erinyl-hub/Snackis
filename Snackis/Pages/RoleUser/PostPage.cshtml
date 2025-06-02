@@ -6,15 +6,16 @@
 
 <form method="post" enctype="multipart/form-data">
 
-
-    <select id="categorySelect">
+    @if(Model.Categories != null) // Ska gå till post om skapad.
+    {
+        <select id="categorySelect" class="from-control">
         @foreach (var categorie in Model.Categories)
         {
             <option value="@categorie.Id">@categorie.CategorieName</option>
         }
     </select>
 
-    <select id="headingSelect"></select>
+    <select id="headingSelect" name="Post.HeadingId" class="from-control"></select>
 
     <script>
         const categories = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Categories));
@@ -42,6 +43,7 @@
 
         updateHeadings();
     </script>
+    }
 
     <br /><br />
 
@@ -51,9 +53,13 @@
 
     <label asp-for="Post.PostHeading"></label>
     <input asp-for="Post.PostHeading" />
+    <span asp-validation-for="Post.PostHeading" class="text-danger"></span>
+
     <br /><br />
+
     <label asp-for="Post.PostText"></label>
     <textarea asp-for="Post.PostText" cols="40" rows="5"></textarea>
+    <span asp-validation-for="Post.PostText" class="text-danger"></span>
     <br />
 
 
@@ -63,3 +69,5 @@
 
     <input type="submit" class="btn btn-success" value="Spara inlägget" />
 </form>
+
+<partial name="_ValidationScriptsPartial" />
