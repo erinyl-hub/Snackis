@@ -8,11 +8,11 @@ using Snackis.Models.Postings;
 
 namespace Snackis.Pages.RoleUser
 {
-    public class PostsViewPageModel : PageModel
+    public class PostPageModel : PageModel
     {
         private readonly UserManager<SnackisUser> _userManager;
         private readonly MyDbContext _context;
-        public PostsViewPageModel
+        public PostPageModel
                   (UserManager<SnackisUser> userManager, MyDbContext context)
         {
             _userManager = userManager;
@@ -36,21 +36,17 @@ namespace Snackis.Pages.RoleUser
         {
             List<Dtos.PostViewDto> Posts;
 
-           return await _context.Posts
-                .Include(p => p.SnackisUser)
-                .Where(p => p.HeadingId == headingId)
-                .Select(p => new Dtos.PostViewDto
-                {
-                    Id = p.Id,
-                    Header = p.PostHeading,
-                    PostDate = p.PostDate,
-                    UserPoster = p.SnackisUser.UserName
-                }).ToListAsync();
+            return await _context.Posts
+                 .Include(p => p.SnackisUser)
+                 .Where(p => p.HeadingId == headingId)
+                 .Select(p => new Dtos.PostViewDto
+                 {
+                     Id = p.Id,
+                     Header = p.PostHeading,
+                     PostDate = p.PostDate,
+                     UserPoster = p.SnackisUser.UserName
+                 }).ToListAsync();
 
         }
-
-
-
-
     }
 }

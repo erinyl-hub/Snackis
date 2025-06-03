@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Snackis.Data;
 using Snackis.Models.Postings;
 
 namespace Snackis.Models
 {
-    public class MyDbContext : DbContext
+    public class MyDbContext : SnackisContext
     {
-        public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
+        public MyDbContext(DbContextOptions<SnackisContext> options) : base(options)
         {
         }
 
@@ -29,6 +30,12 @@ namespace Snackis.Models
                 .HasOne(b => b.Heading)
                 .WithMany(g => g.Posts)
                 .HasForeignKey(b => b.HeadingId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Post>()
+                .HasOne(p => p.SnackisUser)
+                .WithMany()
+                .HasForeignKey(p => p.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
 
