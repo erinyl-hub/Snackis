@@ -245,6 +245,47 @@ namespace Snackis.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("Snackis.Models.Postings.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CommentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CommentImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CommentText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CommentUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("ParentCommentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentCommentId");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("Snackis.Models.Postings.Heading", b =>
                 {
                     b.Property<int>("Id")
@@ -290,6 +331,9 @@ namespace Snackis.Migrations
 
                     b.Property<string>("PostHeading")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostImage")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PostText")
@@ -365,6 +409,30 @@ namespace Snackis.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Snackis.Models.Postings.Comment", b =>
+                {
+                    b.HasOne("Snackis.Models.Postings.Comment", "ParentComment")
+                        .WithMany("Replies")
+                        .HasForeignKey("ParentCommentId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Snackis.Models.Postings.Post", "Post")
+                        .WithMany("Comments")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Snackis.Areas.Identity.Data.SnackisUser", "SnackisUser")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("ParentComment");
+
+                    b.Navigation("Post");
+
+                    b.Navigation("SnackisUser");
+                });
+
             modelBuilder.Entity("Snackis.Models.Postings.Heading", b =>
                 {
                     b.HasOne("Snackis.Models.Postings.Categorie", "Categorie")
@@ -393,14 +461,29 @@ namespace Snackis.Migrations
                     b.Navigation("SnackisUser");
                 });
 
+            modelBuilder.Entity("Snackis.Areas.Identity.Data.SnackisUser", b =>
+                {
+                    b.Navigation("Comments");
+                });
+
             modelBuilder.Entity("Snackis.Models.Postings.Categorie", b =>
                 {
                     b.Navigation("Headings");
                 });
 
+            modelBuilder.Entity("Snackis.Models.Postings.Comment", b =>
+                {
+                    b.Navigation("Replies");
+                });
+
             modelBuilder.Entity("Snackis.Models.Postings.Heading", b =>
                 {
                     b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("Snackis.Models.Postings.Post", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }

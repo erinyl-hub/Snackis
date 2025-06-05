@@ -6,7 +6,8 @@ namespace Snackis.Models.Postings
     {
         public int Id { get; set; }
         public string PostHeading { get; set; }
-        public string PostText { get; set; }     
+        public string PostText { get; set; }
+        public string? PostImage { get; set; }
         public DateTime PostDate { get; set; }
         public DateTime? PostUpdated { get; set; }
         public int? CommentsCount { get; set; }  
@@ -19,6 +20,8 @@ namespace Snackis.Models.Postings
 
         public int HeadingId { get; set; }
         public Heading? Heading { get; set; }
+
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
     }
 }

@@ -2,3 +2,117 @@
 @model Snackis.Pages.RoleUser.PostPageModel
 @{
 }
+
+<div class="container-sm">
+    <div class="row g-3">
+        @if (Model.Post != null)
+        {
+            <div class="list-group-item shadow p-3" style="text-decoration: none; color: inherit;">
+                <p class="card-header">
+                    @Model.Post.CreatedOn.ToShortDateString()
+                    <br />
+                    @Model.Post.UserName
+                </p>
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Post.Header</h5>
+                </div>
+                <p class="card-body">@Model.Post.Text</p>
+
+
+                <div class="card-footer">
+                    <form method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="CommentId" value="@Model.Post.Id" />
+                        <button class="toggleBtn" type="button">Reply</button>
+                        <div class="toggleBox" style="display:none; margin-top:10px; border: 1px solid #ccc; padding:10px;">
+                            <label asp-for="Comment.CommentText"></label>
+                            <textarea asp-for="Comment.CommentText" cols="80" rows="5"></textarea>
+                            <br /> <br />
+                            <button type="submit">Submit Reply</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <br />
+
+            @if (Model.Comments != null)
+            {
+                @foreach (var comment in Model.Comments)
+                {
+
+                    <div class="list-group-item shadow p-3" style="text-decoration: none; color: inherit;">
+                        <p class="card-header d-flex justify-content-between align-items-center">
+                            <span>@comment.UserName
+                                <br /> 
+                                Response to
+                            </span>
+                            <span>@comment.CreatedOn.ToShortDateString()</span>
+                            
+                        </p>
+                        <br />
+                        
+                       
+
+                        @if (comment.ParentComment != null)
+                        {
+                            <div class="card">
+                                <p class="card-header">
+
+                                    @comment.ParentComment.CreatedOn.ToShortDateString()
+                                    <br />
+                                    @comment.ParentComment.UserName
+                                </p>
+                                <p class="card-body">
+
+                                    @comment.ParentComment.Text
+                                </p>
+                            </div>
+                        }
+
+
+                        <p class="card-body">@comment.Text</p>
+
+
+                        <div class="card-footer">
+                            <form method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="CommentId" value="@comment.Id" />
+                                <button class="toggleBtn" type="button">Reply</button>
+                                <div class="toggleBox" style="display:none; margin-top:10px; border: 1px solid #ccc; padding:10px;">
+                                    <label asp-for="Comment.CommentText"></label>
+                                    <textarea asp-for="Comment.CommentText" cols="80" rows="5"></textarea>
+                                    <br /> <br />
+                                    <button type="submit">Submit Reply</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <br />
+                }
+            }
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const buttons = document.querySelectorAll('.toggleBtn');
+          buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+              const box = btn.nextElementSibling;
+
+              if (box.style.display === 'none' || box.style.display === '') {
+                box.style.display = 'block';
+                btn.textContent = 'Cancel';
+              } else {
+                box.style.display = 'none';
+                btn.textContent = 'Reply';
+              }
+            });
+          });
+        });
+    </script>
+}
+
