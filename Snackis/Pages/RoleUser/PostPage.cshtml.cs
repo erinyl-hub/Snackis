@@ -49,7 +49,10 @@ namespace Snackis.Pages.RoleUser
                 Comment.CommentDate = DateTime.Now;
                 Comment.UserId = _userManager.GetUserId(User);
                 Comment.PostId = Post.Id;
-                Comment.ParentCommentId = CommentId;
+                if (CommentId != null && CommentId != 0)
+                {
+                    Comment.ParentCommentId = CommentId;
+                }
 
                 await _context.AddAsync(Comment);
                 await _context.SaveChangesAsync();

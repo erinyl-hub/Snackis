@@ -21,7 +21,7 @@
 
                 <div class="card-footer">
                     <form method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="CommentId" value="@Model.Post.Id" />
+                        <input type="hidden" name="CommentId" value="@null" />
                         <button class="toggleBtn" type="button">Reply</button>
                         <div class="toggleBox" style="display:none; margin-top:10px; border: 1px solid #ccc; padding:10px;">
                             <label asp-for="Comment.CommentText"></label>
@@ -67,6 +67,21 @@
                                     @comment.ParentComment.Text
                                 </p>
                             </div>
+                        }
+                        else
+                        {
+                        <div class="card">
+                            <p class="card-header">
+
+                                @Model.Post.CreatedOn.ToShortDateString()
+                                <br />
+                                    @Model.Post.UserName
+                            </p>
+                            <p class="card-body">
+
+                                    @Model.Post.Text
+                            </p>
+                        </div>
                         }
 
 
