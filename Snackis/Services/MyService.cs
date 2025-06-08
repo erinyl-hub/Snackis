@@ -13,5 +13,11 @@
         {
             await _httpClient.PostAsJsonAsync("api/report", report);
         }
+
+        public async Task<List<Models.Postings.Report>> GetReportsAsync()
+        {
+            var response = await _httpClient.GetFromJsonAsync<List<Models.Postings.Report>>("api/report");
+            return response!;
+        }
     }
 }

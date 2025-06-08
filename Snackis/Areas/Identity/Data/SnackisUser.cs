@@ -14,5 +14,8 @@ public class SnackisUser : IdentityUser
 
     [PersonalData]
     public string Name { get; set; }
+
+    [PersonalData]
+    public string? UserImage { get; set; }
 }
 

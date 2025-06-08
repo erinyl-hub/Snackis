@@ -36,13 +36,12 @@
                         <span>
                     <form method="post" enctype="multipart/form-data">
                         <input type="hidden" name="CommentId" value="@null" />
-                        <button class="toggleBtn" type="button">Reply</button>
+                                <button class="toggleBtn btn btn-outline-dark" type="button">Reply</button>
                         
                         <div class="toggleBox" style="display:none; margin-top:10px; border: 1px solid #ccc; padding:10px;">
-                            <label asp-for="Comment.CommentText"></label>
                             <textarea asp-for="Comment.CommentText" cols="80" rows="5"></textarea>
                             <br /> <br />
-                            <button type="submit">Submit Reply</button>
+                                    <button type="submit" class="btn btn-outline-dark">Submit Reply</button>
                         </div>
                     </form>
                         </span>
@@ -51,7 +50,7 @@
 
                         <span>
                             <form method="post" asp-page-handler="PostReport" asp-route-postId="@Model.Post.Id">
-                                <button type="submit" class="btn btn-warning">Report</button>
+                                <button type="submit" class="btn btn-outline-dark"> Report</button>
                             </form>
                     </span>
                     </div>
@@ -60,10 +59,6 @@
 
 
                 </div>
-
-
-
-
 
             </div>
             <br />
@@ -131,7 +126,7 @@
                                         <input type="hidden" name="CommentId" value="@comment.Id" />
 
 
-                                        <button class="toggleBtn" type="button">Reply</button>
+                                        <button class="toggleBtn btn btn-outline-dark" type="button">Reply</button>
 
 
 
@@ -139,7 +134,7 @@
                                             <label asp-for="Comment.CommentText"></label>
                                             <textarea asp-for="Comment.CommentText" cols="80" rows="5"></textarea>
                                             <br /> <br />
-                                            <button type="submit">Submit Reply</button>
+                                            <button type="submit" class="btn btn-outline-dark">Submit Reply</button>
                                         </div>
                                     </form>
                                 </span>
@@ -147,8 +142,8 @@
 
 
                                 <span>
-                                    <form method="post" enctype="multipart/form-data" asp-page-handler="CommentReport" asp-route-postId="@comment.Id">
-                                        <button type="submit" class="btn btn-warning">Report</button>
+                                    <form method="post" enctype="multipart/form-data" asp-page-handler="CommentReport" asp-route-commentId="@comment.Id">
+                                        <button type="submit" class="btn btn-outline-dark">Report</button>
                                     </form>
                                 </span>
                             </div>
@@ -165,21 +160,6 @@
     </div>
 </div>
 
-<div id="reportwindow"
-     style="
-            display:none;
-            position:fixed;
-            top:50%;
-            left:50%;
-            transform: translate(-50%, -50%);
-            background:white;
-            padding:20px;
-            border:1px solid #ccc;
-            width: 40%;
-            height: 40vh;">
-    <p>Det här är en popup!</p>
-    <button onclick="hideReport()">Stäng</button>
-</div>
 
 
 @section Scripts {
@@ -202,24 +182,10 @@
         });
 
 
-        //         function showReport() {
-        //     document.getElementById("reportwindow").style.display = "block";
-        // }
 
-        // function hideReport() {
-        //     document.getElementById("reportwindow").style.display = "none";
-        // }
     </script>
 }
 
 
 
 
-@* 
-<div class="card-header d-flex justify-content-between align-items-center">
-    <span>
-        <button class="toggleBtn" type="button">Reply</button>
-    </span>
-    <span><button type="submit">Report</button></span>
-</div>
- *@
