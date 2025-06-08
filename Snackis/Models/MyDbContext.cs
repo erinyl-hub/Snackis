@@ -65,6 +65,9 @@ namespace Snackis.Models
                 .HasForeignKey(c => c.ParentCommentId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<SnackisUser>()
+                .HasIndex(u => u.Name)
+                .IsUnique();
         }
 
     }

@@ -8,21 +8,36 @@
         @if (Model.Post != null)
         {
             <div class="list-group-item shadow p-3" style="text-decoration: none; color: inherit;">
-                <p class="card-header">
-                    @Model.Post.CreatedOn.ToShortDateString()
-                    <br />
-                    @Model.Post.UserName
+
+                <p class="card-header d-flex justify-content-between align-items-center">
+                    <span>
+                        @Model.Post.UserName
+                        <br />
+                        <br />
+                    </span>
+                    <span>@Model.Post.CreatedOn.ToShortDateString()</span>
+
                 </p>
+
+
+
                 <div class="card-body">
                     <h5 class="card-title">@Model.Post.Header</h5>
                 </div>
                 <p class="card-body">@Model.Post.Text</p>
 
 
+
+
+
                 <div class="card-footer">
+
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>
                     <form method="post" enctype="multipart/form-data">
                         <input type="hidden" name="CommentId" value="@null" />
                         <button class="toggleBtn" type="button">Reply</button>
+                        
                         <div class="toggleBox" style="display:none; margin-top:10px; border: 1px solid #ccc; padding:10px;">
                             <label asp-for="Comment.CommentText"></label>
                             <textarea asp-for="Comment.CommentText" cols="80" rows="5"></textarea>
@@ -30,7 +45,25 @@
                             <button type="submit">Submit Reply</button>
                         </div>
                     </form>
+                        </span>
+
+
+
+                        <span>
+                            <form method="post" asp-page-handler="PostReport" asp-route-postId="@Model.Post.Id">
+                                <button type="submit" class="btn btn-warning">Report</button>
+                            </form>
+                    </span>
+                    </div>
+
+
+
+
                 </div>
+
+
+
+
 
             </div>
             <br />
@@ -42,16 +75,17 @@
 
                     <div class="list-group-item shadow p-3" style="text-decoration: none; color: inherit;">
                         <p class="card-header d-flex justify-content-between align-items-center">
-                            <span>@comment.UserName
-                                <br /> 
+                            <span>
+                                @comment.UserName
+                                <br />
                                 Response to
                             </span>
                             <span>@comment.CreatedOn.ToShortDateString()</span>
-                            
+
                         </p>
                         <br />
-                        
-                       
+
+
 
                         @if (comment.ParentComment != null)
                         {
@@ -70,18 +104,18 @@
                         }
                         else
                         {
-                        <div class="card">
-                            <p class="card-header">
+                            <div class="card">
+                                <p class="card-header">
 
-                                @Model.Post.CreatedOn.ToShortDateString()
-                                <br />
+                                    @Model.Post.CreatedOn.ToShortDateString()
+                                    <br />
                                     @Model.Post.UserName
-                            </p>
-                            <p class="card-body">
+                                </p>
+                                <p class="card-body">
 
                                     @Model.Post.Text
-                            </p>
-                        </div>
+                                </p>
+                            </div>
                         }
 
 
@@ -89,16 +123,38 @@
 
 
                         <div class="card-footer">
-                            <form method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="CommentId" value="@comment.Id" />
-                                <button class="toggleBtn" type="button">Reply</button>
-                                <div class="toggleBox" style="display:none; margin-top:10px; border: 1px solid #ccc; padding:10px;">
-                                    <label asp-for="Comment.CommentText"></label>
-                                    <textarea asp-for="Comment.CommentText" cols="80" rows="5"></textarea>
-                                    <br /> <br />
-                                    <button type="submit">Submit Reply</button>
-                                </div>
-                            </form>
+
+
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <span>
+                                    <form method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="CommentId" value="@comment.Id" />
+
+
+                                        <button class="toggleBtn" type="button">Reply</button>
+
+
+
+                                        <div class="toggleBox" style="display:none; margin-top:10px; border: 1px solid #ccc; padding:10px;">
+                                            <label asp-for="Comment.CommentText"></label>
+                                            <textarea asp-for="Comment.CommentText" cols="80" rows="5"></textarea>
+                                            <br /> <br />
+                                            <button type="submit">Submit Reply</button>
+                                        </div>
+                                    </form>
+                                </span>
+
+
+
+                                <span>
+                                    <form method="post" enctype="multipart/form-data" asp-page-handler="CommentReport" asp-route-postId="@comment.Id">
+                                        <button type="submit" class="btn btn-warning">Report</button>
+                                    </form>
+                                </span>
+                            </div>
+
+
+
                         </div>
 
                     </div>
@@ -107,6 +163,22 @@
             }
         }
     </div>
+</div>
+
+<div id="reportwindow"
+     style="
+            display:none;
+            position:fixed;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+            background:white;
+            padding:20px;
+            border:1px solid #ccc;
+            width: 40%;
+            height: 40vh;">
+    <p>Det här är en popup!</p>
+    <button onclick="hideReport()">Stäng</button>
 </div>
 
 
@@ -128,6 +200,26 @@
             });
           });
         });
+
+
+        //         function showReport() {
+        //     document.getElementById("reportwindow").style.display = "block";
+        // }
+
+        // function hideReport() {
+        //     document.getElementById("reportwindow").style.display = "none";
+        // }
     </script>
 }
 
+
+
+
+@* 
+<div class="card-header d-flex justify-content-between align-items-center">
+    <span>
+        <button class="toggleBtn" type="button">Reply</button>
+    </span>
+    <span><button type="submit">Report</button></span>
+</div>
+ *@

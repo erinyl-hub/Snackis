@@ -6,6 +6,7 @@ using Snackis.Areas.Identity.Data;
 using Snackis.Dtos;
 using Snackis.Models;
 using Snackis.Models.Postings;
+using Snackis.Services;
 using System.ComponentModel.Design;
 
 namespace Snackis.Pages.RoleUser
@@ -14,11 +15,13 @@ namespace Snackis.Pages.RoleUser
     {
         private readonly UserManager<SnackisUser> _userManager;
         private readonly MyDbContext _context;
+        private readonly MyService _myService;
         public PostPageModel
-                  (UserManager<SnackisUser> userManager, MyDbContext context)
+                  (UserManager<SnackisUser> userManager, MyDbContext context, Services.MyService myService)
         {
             _userManager = userManager;
             _context = context;
+            _myService = myService;
         }
 
         public List<CommentDto> Comments;
@@ -74,7 +77,7 @@ namespace Snackis.Pages.RoleUser
                      Header = p.PostHeading,
                      Text = p.PostText,
                      CreatedOn = p.PostDate,
-                     UserName = p.SnackisUser.UserName,
+                     UserName = p.SnackisUser.Name,
                      UserId = p.SnackisUser.Id,
                      Image = p.PostImage,
                  }).FirstOrDefaultAsync();
@@ -91,7 +94,7 @@ namespace Snackis.Pages.RoleUser
                     Id = c.Id,
                     Text = c.CommentText,
                     CreatedOn = c.CommentDate,
-                    UserName = c.SnackisUser.UserName,
+                    UserName = c.SnackisUser.Name,
                     UserId = c.SnackisUser.Id,
                     Image = c.CommentImage,
                     ParentComment = c.ParentComment == null ? null : new CommentDto
@@ -99,7 +102,7 @@ namespace Snackis.Pages.RoleUser
                         Id = c.ParentComment.Id,
                         Text = c.ParentComment.CommentText,
                         CreatedOn = c.ParentComment.CommentDate,
-                        UserName = c.ParentComment.SnackisUser.UserName,
+                        UserName = c.ParentComment.SnackisUser.Name,
                         UserId = c.ParentComment.SnackisUser.Id,
                         Image = c.ParentComment.CommentImage
                     }
@@ -109,6 +112,32 @@ namespace Snackis.Pages.RoleUser
                 .ToListAsync();
 
 
+        }
+
+        public async Task<IActionResult> OnPostPostReportAsync(int postId)
+        {
+            var report = new Models.Postings.Report
+            {
+                PoastId = postId,
+                ReportDate = DateTime.Now,
+                UserId = _userManager.GetUserId(User)
+            };
+
+            await _myService.PostReportAsync(report);
+            return RedirectToPage(); 
+        }
+
+        public async Task<IActionResult> OnPostCommentReportAsync(int commentId)
+        {
+            var report = new Models.Postings.Report
+            {
+                CommentId = commentId,
+                ReportDate = DateTime.Now,
+                UserId = _userManager.GetUserId(User)
+            };
+
+            await _myService.PostReportAsync(report);
+            return RedirectToPage();
         }
     }
 }
