@@ -36,6 +36,8 @@ namespace Snackis.Areas.Identity.Pages.Account.Manage
         [BindProperty]
         public InputModel Input { get; set; }
 
+        public IFormFile UploadedImage { get; set; }
+
 
         public class InputModel
         {
@@ -43,8 +45,6 @@ namespace Snackis.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
-
-            public string UserImage { get; set; }
         }
 
         private async Task LoadAsync(SnackisUser user)
@@ -86,6 +86,24 @@ namespace Snackis.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
+            if (UploadedImage != null)
+            {
+                string fileName = "";
+
+                fileName = Guid.NewGuid().ToString() + UploadedImage.FileName;
+                using (var fileStream = new FileStream("./wwwroot/images/" + fileName, FileMode.Create))
+                {
+                    await UploadedImage.CopyToAsync(fileStream);
+
+                }
+
+                user.UserImage = "/images/" + fileName;
+
+                await _userManager.UpdateAsync(user);
+            }
+
+
+
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
             if (Input.PhoneNumber != phoneNumber)
             {
@@ -101,5 +119,29 @@ namespace Snackis.Areas.Identity.Pages.Account.Manage
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
         }
+
+        private async Task ChangeUserImage()
+        {
+            
+
+            if (UploadedImage != null)
+            {
+                string fileName = "";
+
+                fileName = Guid.NewGuid().ToString() + UploadedImage.FileName;
+                using (var fileStream = new FileStream("./wwwroot/images/" + fileName, FileMode.Create))
+                {
+                    await UploadedImage.CopyToAsync(fileStream);
+
+                }
+                 
+
+            }
+
+
+        }
     }
+
+
+
 }

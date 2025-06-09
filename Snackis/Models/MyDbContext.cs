@@ -17,7 +17,6 @@ namespace Snackis.Models
         public DbSet<Models.Postings.Post> Posts { get; set; }
         public DbSet<Models.Postings.Comment> Comments { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -27,7 +26,6 @@ namespace Snackis.Models
                 .WithMany(g => g.Headings)
                 .HasForeignKey(b => b.CategorieId)
                 .OnDelete(DeleteBehavior.Cascade);
-
 
             modelBuilder.Entity<Post>()
                 .HasOne(b => b.Heading)
@@ -69,6 +67,5 @@ namespace Snackis.Models
                 .HasIndex(u => u.Name)
                 .IsUnique();
         }
-
     }
 }
