@@ -95,6 +95,7 @@ namespace Snackis.Areas.Identity.Pages.Account
                 var user = CreateUser();
 
                 user.Name = Input.Name;
+                user.UserImage = "/images/default.jpg";
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
