@@ -11,6 +11,8 @@
 
                 <p class="card-header d-flex justify-content-between align-items-center">
                     <span>
+                        <img src="@Model.Post.UserImage" alt="Profile Image" width="50px" />
+
                         @Model.Post.UserName
                         <br />
                         <br />
@@ -71,6 +73,7 @@
                     <div class="list-group-item shadow p-3" style="text-decoration: none; color: inherit;">
                         <p class="card-header d-flex justify-content-between align-items-center">
                             <span>
+                                <img src="@comment.Image" alt="Profile Image" width="50px" />
                                 @comment.UserName
                                 <br />
                                 Response to
@@ -85,11 +88,19 @@
                         @if (comment.ParentComment != null)
                         {
                             <div class="card">
-                                <p class="card-header">
+                                <p class="card-header d-flex justify-content-between align-items-center">
 
-                                    @comment.ParentComment.CreatedOn.ToShortDateString()
-                                    <br />
-                                    @comment.ParentComment.UserName
+
+                                    <span>
+                                        <img src="@comment.Image" alt="Profile Image" width="50px" />
+                                        @comment.ParentComment.UserName
+                                        <br />
+                                        Response to
+                                    </span>
+                                    <span>@comment.ParentComment.CreatedOn.ToShortDateString()</span>
+
+
+
                                 </p>
                                 <p class="card-body">
 
@@ -100,11 +111,18 @@
                         else
                         {
                             <div class="card">
-                                <p class="card-header">
+                                <p class="card-header d-flex justify-content-between align-items-center">
 
-                                    @Model.Post.CreatedOn.ToShortDateString()
-                                    <br />
-                                    @Model.Post.UserName
+                                    <span>
+                                        <img src="@Model.Post.UserImage" alt="Profile Image" width="50px" />
+                                        @Model.Post.UserName
+                                        <br />
+                                        Response to
+                                    </span>
+                                    <span>@Model.Post.CreatedOn.ToShortDateString()</span>
+                           
+                                    
+                                    
                                 </p>
                                 <p class="card-body">
 

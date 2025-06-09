@@ -79,7 +79,7 @@ namespace Snackis.Pages.RoleUser
                      CreatedOn = p.PostDate,
                      UserName = p.SnackisUser.Name,
                      UserId = p.SnackisUser.Id,
-                     Image = p.PostImage,
+                     UserImage = p.SnackisUser.UserImage,
                  }).FirstOrDefaultAsync();
 
         }
@@ -96,7 +96,7 @@ namespace Snackis.Pages.RoleUser
                     CreatedOn = c.CommentDate,
                     UserName = c.SnackisUser.Name,
                     UserId = c.SnackisUser.Id,
-                    Image = c.CommentImage,
+                    Image = c.SnackisUser.UserImage,
                     ParentComment = c.ParentComment == null ? null : new CommentDto
                     {
                         Id = c.ParentComment.Id,
@@ -104,7 +104,7 @@ namespace Snackis.Pages.RoleUser
                         CreatedOn = c.ParentComment.CommentDate,
                         UserName = c.ParentComment.SnackisUser.Name,
                         UserId = c.ParentComment.SnackisUser.Id,
-                        Image = c.ParentComment.CommentImage
+                        Image = c.ParentComment.SnackisUser.UserImage
                     }
 
 
