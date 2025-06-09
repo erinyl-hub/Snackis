@@ -44,7 +44,8 @@ namespace Snackis.Pages.RoleUser
                     Id = p.Id,
                     Header = p.PostHeading,
                     PostDate = p.PostDate,
-                    UserPoster = p.SnackisUser.Name
+                    UserPoster = p.SnackisUser.Name,
+                    UserImage = p.SnackisUser.UserImage
                 }).ToListAsync();
 
         }

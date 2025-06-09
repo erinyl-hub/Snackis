@@ -8,6 +8,7 @@
         public DateTime LastComment { get; set; }
         public string Header { get; set; }
         public DateTime PostDate { get; set; }
+        public string UserImage { get; set; }
 
         public int HeadingId { get; set; }
 
