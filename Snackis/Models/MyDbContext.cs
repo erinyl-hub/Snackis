@@ -66,6 +66,25 @@ namespace Snackis.Models
             modelBuilder.Entity<SnackisUser>()
                 .HasIndex(u => u.Name)
                 .IsUnique();
+
+            modelBuilder.Entity<SnackisUser>()
+                .HasMany(u => u.Comments)
+                .WithOne(c => c.SnackisUser)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Models.Messages.Message>()
+                .HasOne(m => m.UserSender)
+                .WithMany(u => u.SentMessages)
+                .HasForeignKey(m => m.UserSenderId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Models.Messages.Message>()
+                .HasOne(m => m.UserReceiver)
+                .WithMany(u => u.ReceivedMessages)
+                .HasForeignKey(m => m.UserReceiverId)
+                .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }
