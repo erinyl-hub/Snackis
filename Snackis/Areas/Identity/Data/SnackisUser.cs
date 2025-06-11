@@ -11,8 +11,8 @@ namespace Snackis.Areas.Identity.Data;
 public class SnackisUser : IdentityUser
 {
     public ICollection<Comment> Comments { get; set; } = new List<Comment>();
-    public ICollection<Models.Messages.Message> SentMessages { get; set; }
-    public ICollection<Models.Messages.Message> ReceivedMessages { get; set; }
+    //public ICollection<Models.Messages.Message> SentMessages { get; set; } = new List<Models.Messages.Message>();
+    //public ICollection<Models.Messages.Message> ReceivedMessages { get; set; } = new List<Models.Messages.Message>();
 
 
     [PersonalData]

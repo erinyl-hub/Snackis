@@ -245,25 +245,25 @@ namespace Snackis.Migrations
                     b.Property<DateTime>("MessageSentAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("ReceiverId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("UserMessage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserReceiverId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserSenderId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserReceiverId");
+                    b.HasIndex("ReceiverId");
 
-                    b.HasIndex("UserSenderId");
+                    b.HasIndex("SenderId");
 
-                    b.ToTable("Message");
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("Snackis.Models.Postings.Categorie", b =>
@@ -453,21 +453,21 @@ namespace Snackis.Migrations
 
             modelBuilder.Entity("Snackis.Models.Messages.Message", b =>
                 {
-                    b.HasOne("Snackis.Areas.Identity.Data.SnackisUser", "UserReceiver")
+                    b.HasOne("Snackis.Areas.Identity.Data.SnackisUser", "Receiver")
                         .WithMany("ReceivedMessages")
-                        .HasForeignKey("UserReceiverId")
+                        .HasForeignKey("ReceiverId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Snackis.Areas.Identity.Data.SnackisUser", "UserSender")
+                    b.HasOne("Snackis.Areas.Identity.Data.SnackisUser", "Sender")
                         .WithMany("SentMessages")
-                        .HasForeignKey("UserSenderId")
+                        .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("UserReceiver");
+                    b.Navigation("Receiver");
 
-                    b.Navigation("UserSender");
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("Snackis.Models.Postings.Comment", b =>

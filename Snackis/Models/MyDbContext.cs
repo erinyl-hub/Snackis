@@ -16,6 +16,7 @@ namespace Snackis.Models
         public DbSet<Models.Postings.Categorie> Categories { get; set; }
         public DbSet<Models.Postings.Post> Posts { get; set; }
         public DbSet<Models.Postings.Comment> Comments { get; set; }
+        //public DbSet<Models.Messages.Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -73,18 +74,23 @@ namespace Snackis.Models
                 .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Models.Messages.Message>()
-                .HasOne(m => m.UserSender)
-                .WithMany(u => u.SentMessages)
-                .HasForeignKey(m => m.UserSenderId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<Models.Messages.Message>()
+            //    .HasOne(m => m.Sender)
+            //    .WithMany(u => u.SentMessages)
+            //    .HasForeignKey(m => m.SenderId)
+            //    .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Models.Messages.Message>()
-                .HasOne(m => m.UserReceiver)
-                .WithMany(u => u.ReceivedMessages)
-                .HasForeignKey(m => m.UserReceiverId)
-                .OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<Models.Messages.Message>()
+            //    .HasOne(m => m.Receiver)
+            //    .WithMany(u => u.ReceivedMessages)
+            //    .HasForeignKey(m => m.ReceiverId)
+            //    .OnDelete(DeleteBehavior.Restrict);
 
+            //modelBuilder.Entity<SnackisUser>()
+            //    .Ignore(u => u.ReceivedMessages);
+
+            //modelBuilder.Entity<SnackisUser>()
+            //    .Ignore(u => u.SentMessages);
         }
     }
 }

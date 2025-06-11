@@ -14,6 +14,14 @@
                         <img src="@Model.Post.UserImage" alt="Profile Image" width="50px" />
 
                         @Model.Post.UserName
+
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-page="/RoleUser/SendMsgPage" asp-route-id="@Model.Post.UserId">
+                                <img src="/images/msg.png" alt="Beskrivning" width="35px" />
+                            </a>
+                        }
                         <br />
                         <br />
                     </span>
@@ -31,36 +39,40 @@
 
 
 
+                @if (User.Identity.IsAuthenticated)
+                {
 
-                <div class="card-footer">
+                    <div class="card-footer">
 
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <span>
-                    <form method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="CommentId" value="@null" />
-                                <button class="toggleBtn btn btn-outline-dark" type="button">Reply</button>
-                        
-                        <div class="toggleBox" style="display:none; margin-top:10px; border: 1px solid #ccc; padding:10px;">
-                            <textarea asp-for="Comment.CommentText" cols="80" rows="5"></textarea>
-                            <br /> <br />
-                                    <button type="submit" class="btn btn-outline-dark">Submit Reply</button>
+
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span>
+                                <form method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="CommentId" value="@null" />
+                                    <button class="toggleBtn btn btn-outline-dark" type="button">Reply</button>
+
+                                    <div class="toggleBox" style="display:none; margin-top:10px; border: 1px solid #ccc; padding:10px;">
+                                        <textarea asp-for="Comment.CommentText" cols="80" rows="5"></textarea>
+                                        <br /> <br />
+                                        <button type="submit" class="btn btn-outline-dark">Submit Reply</button>
+                                    </div>
+                                </form>
+                            </span>
+
+
+
+                            <span>
+                                <form method="post" asp-page-handler="PostReport" asp-route-postId="@Model.Post.Id">
+                                    <button type="submit" class="btn btn-outline-dark"> Report</button>
+                                </form>
+                            </span>
                         </div>
-                    </form>
-                        </span>
 
 
 
-                        <span>
-                            <form method="post" asp-page-handler="PostReport" asp-route-postId="@Model.Post.Id">
-                                <button type="submit" class="btn btn-outline-dark"> Report</button>
-                            </form>
-                    </span>
+
                     </div>
-
-
-
-
-                </div>
+                }
 
             </div>
             <br />
@@ -95,7 +107,7 @@
                                         <img src="@comment.Image" alt="Profile Image" width="50px" />
                                         @comment.ParentComment.UserName
                                         <br />
-                                        Response to
+
                                     </span>
                                     <span>@comment.ParentComment.CreatedOn.ToShortDateString()</span>
 
@@ -117,12 +129,12 @@
                                         <img src="@Model.Post.UserImage" alt="Profile Image" width="50px" />
                                         @Model.Post.UserName
                                         <br />
-                                        Response to
+
                                     </span>
                                     <span>@Model.Post.CreatedOn.ToShortDateString()</span>
-                           
-                                    
-                                    
+
+
+
                                 </p>
                                 <p class="card-body">
 
@@ -134,8 +146,9 @@
 
                         <p class="card-body">@comment.Text</p>
 
-
-                        <div class="card-footer">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="card-footer">
 
 
                             <div class="card-header d-flex justify-content-between align-items-center">
@@ -149,7 +162,7 @@
 
 
                                         <div class="toggleBox" style="display:none; margin-top:10px; border: 1px solid #ccc; padding:10px;">
-                                            <label asp-for="Comment.CommentText"></label>
+
                                             <textarea asp-for="Comment.CommentText" cols="80" rows="5"></textarea>
                                             <br /> <br />
                                             <button type="submit" class="btn btn-outline-dark">Submit Reply</button>
@@ -169,6 +182,7 @@
 
 
                         </div>
+                        }
 
                     </div>
                     <br />

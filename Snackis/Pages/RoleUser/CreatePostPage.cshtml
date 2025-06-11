@@ -6,16 +6,48 @@
 
 <form method="post" enctype="multipart/form-data">
 
-    @if(Model.Categories != null) // Ska gå till post om skapad.
+    @if (Model.Categories != null)
     {
         <select id="categorySelect" class="from-control">
-        @foreach (var categorie in Model.Categories)
-        {
-            <option value="@categorie.Id">@categorie.CategorieName</option>
-        }
-    </select>
+            @foreach (var categorie in Model.Categories)
+            {
+                <option value="@categorie.Id">@categorie.CategorieName</option>
+            }
+        </select>
 
-    <select id="headingSelect" name="Post.HeadingId" class="from-control"></select>
+        <select id="headingSelect" name="Post.HeadingId" class="from-control"></select>
+
+
+    }
+
+    <br /><br />
+
+
+
+    <br /><br />
+
+    <label asp-for="Post.PostHeading">Heading</label>
+    <input asp-for="Post.PostHeading" />
+    <span asp-validation-for="Post.PostHeading" class="text-danger"></span>
+
+    <br /><br />
+
+
+    <textarea asp-for="Post.PostText" cols="40" rows="5"></textarea>
+    <span asp-validation-for="Post.PostText" class="text-danger"></span>
+    <br />
+
+
+
+    <br />
+
+
+    <input type="submit" class="btn btn-success" value="Submit post" />
+</form>
+
+<partial name="_ValidationScriptsPartial" />
+
+@section Scripts {
 
     <script>
         const categories = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.Categories));
@@ -43,31 +75,5 @@
 
         updateHeadings();
     </script>
+
     }
-
-    <br /><br />
-
-
-
-    <br /><br />
-
-    <label asp-for="Post.PostHeading"></label>
-    <input asp-for="Post.PostHeading" />
-    <span asp-validation-for="Post.PostHeading" class="text-danger"></span>
-
-    <br /><br />
-
-    <label asp-for="Post.PostText"></label>
-    <textarea asp-for="Post.PostText" cols="40" rows="5"></textarea>
-    <span asp-validation-for="Post.PostText" class="text-danger"></span>
-    <br />
-
-
-
-    <br />
-
-
-    <input type="submit" class="btn btn-success" value="Spara inlägget" />
-</form>
-
-<partial name="_ValidationScriptsPartial" />

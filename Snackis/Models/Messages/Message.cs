@@ -9,10 +9,10 @@ namespace Snackis.Models.Messages
         public DateTime MessageSentAt { get; set; }
 
 
-        public SnackisUser UserSender { get; set; }
-        public string UserSenderId { get; set; }
+        public string ReceiverId { get; set; }
+        public SnackisUser Receiver { get; set; }
 
-        public SnackisUser UserReceiver { get; set; }
-        public string UserReceiverId { get; set; }
+        public string SenderId { get; set; }
+        public SnackisUser Sender { get; set; }
     }
 }
