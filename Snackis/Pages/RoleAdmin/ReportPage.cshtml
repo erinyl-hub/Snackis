@@ -2,3 +2,36 @@
 @model Snackis.Pages.RoleAdmin.ReportPageModel
 @{
 }
+
+
+@foreach (var report in Model.ReportsDto)
+{
+
+    @if (report.CommentId != null)
+    {
+    <a class="list-group-item list-group-item-action"
+       style="text-decoration: none; color: inherit;">
+        <div class="card-body">
+            
+                @report.ReportDate
+
+                @report.Text
+
+                <form method="post" asp-page-handler="RemoveComment" asp-route-commentId="@report.CommentId" asp-route-reportId="@report.Id">
+                    <button type="submit" class="btn btn-outline-dark">Remove Comment</button>
+                </form>
+
+                <form method="post" asp-page-handler="RemoveReport" asp-route-reportId="@report.Id">
+                    <button type="submit" class="btn btn-outline-dark">Remove Report</button>
+                </form>
+            
+        </div>
+        <p class="card-footer">
+
+        </p>
+
+    </a>
+    <br />
+}
+
+}

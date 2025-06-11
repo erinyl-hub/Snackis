@@ -19,5 +19,10 @@
             var response = await _httpClient.GetFromJsonAsync<List<Models.Postings.Report>>("api/report");
             return response!;
         }
+
+        public async Task DeleteReportAsync(int id)
+        {
+            await _httpClient.DeleteAsync("api/report/" + id);
+        }
     }
 }
