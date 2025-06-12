@@ -49,7 +49,6 @@ namespace Snackis.Pages.RoleUser
                 await _context.AddAsync(Post);
                 await _context.SaveChangesAsync();
                 return Page();
-                //return RedirectToPage("Success");
             }
 
             if (!ModelState.IsValid)
@@ -77,9 +76,5 @@ namespace Snackis.Pages.RoleUser
                         }).ToList()
                     }).ToListAsync();
         }
-
-           
-
-
     }
 }

@@ -36,12 +36,8 @@ namespace Snackis.Pages.RoleUser
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-
-
             Post = await GetPostAsync(id);
             Comments = await GetCommentsAsync(id);
-
-
             return Page();
         }
 
@@ -106,11 +102,8 @@ namespace Snackis.Pages.RoleUser
                         UserId = c.ParentComment.SnackisUser.Id,
                         Image = c.ParentComment.SnackisUser.UserImage
                     }
-
-
                 })
                 .ToListAsync();
-
 
         }
 

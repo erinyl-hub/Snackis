@@ -30,7 +30,7 @@ namespace Snackis.Pages.RoleUser
         public async Task OnGetAsync(string id)
         {
             Message.ReceiverId =  id;
-            Console.WriteLine();
+            
 
         }
     }

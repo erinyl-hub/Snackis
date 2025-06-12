@@ -24,11 +24,7 @@ namespace Snackis.Pages.RoleUser
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-
-
             Posts = await GetPostAsync(id);
-
-
             return Page();
         }
 
@@ -47,7 +43,6 @@ namespace Snackis.Pages.RoleUser
                     UserPoster = p.SnackisUser.Name,
                     UserImage = p.SnackisUser.UserImage
                 }).ToListAsync();
-
         }
 
 

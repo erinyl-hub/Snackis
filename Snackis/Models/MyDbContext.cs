@@ -86,11 +86,6 @@ namespace Snackis.Models
             //    .HasForeignKey(m => m.ReceiverId)
             //    .OnDelete(DeleteBehavior.Restrict);
 
-            //modelBuilder.Entity<SnackisUser>()
-            //    .Ignore(u => u.ReceivedMessages);
-
-            //modelBuilder.Entity<SnackisUser>()
-            //    .Ignore(u => u.SentMessages);
         }
     }
 }

@@ -9,7 +9,6 @@
         <tbody>
             @foreach (var item in Model.Categorie)
             {
-                @* <a class="navbar-brand" asp-area="" asp-page="/Index"><h2>Snackis</h2></a> *@
                 <tr>
                     <td>
                         <a class="text-decoration-none text-dark fw-bold" asp-page="/RoleUser/CategoriePage" asp-route-id="@item.Id">
